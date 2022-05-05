@@ -12,7 +12,21 @@ def bit_serch(n: int):
                 exist_index_list.append(j)
         print(exist_index_list)
 
-def traveling_salesman_problem(n_node: int, edges: list, start_node: int) -> int:
+def traveling_salesman_problem(n_node: int, edges: list) -> int:
+    """bitDPで巡回セールスマン問題を解く スタートするのはindexが0のノードから
+
+    Args:
+        n_node (int): ノードの数
+        edges (list): edges (list): 要素が[ノードの番号, ノードの番号, 距離]となっているリスト
+        
+    Returns:
+        int: _description_
+    """
+    #全集合の数
+    V = 1 << n_node
+    dp = [[float('inf')]*n_node]*V
+    dp
+    
     
     
     
