@@ -67,8 +67,8 @@ def dijkstra(n_node: int, edges_dict: dict, start_node: int) -> list:
     return min_cost
                 
     
-    
-    
+
+
 
 
 if __name__ == "__main__":
