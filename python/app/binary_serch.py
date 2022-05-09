@@ -14,7 +14,7 @@ def n_range_LR(sorted_list: list, L: int, R: int) -> int:
     """
     return bisect.bisect_left(sorted_list, R+1) - bisect.bisect_right(sorted_list, L-1)
 
-def binary_serch_with_is_equal(sorted_list: list, query_num: float):
+def binary_search_with_is_equal(sorted_list: list, query_num: float):
     """sort済みの整数のみが入ってるリストの中でL以上R以下の数字の個数を返す関数
     計算量はO(log(len(sorted_list)))
 
@@ -33,27 +33,15 @@ def binary_serch_with_is_equal(sorted_list: list, query_num: float):
     else:
         return True, [l_index, r_index]
 
-def n_divisor(sorted_list: list, n: int) -> int:
-    """sort済みの整数のみが入ってるリストの中でnの約数の個数を返す関数
-    計算量はO(log(len(sorted_list))*√n)
 
-    Args:
-        sorted_list (list): sort済みの整数のみが入ってるリスト
-        n (int): 約数を探すn
-
-    Returns:
-        int: _description_
-    """
-    #for i in range(int(n**(1/2)+1)):
-        
 
 if __name__ == "__main__":
     a = [0, 0, 1, 1, 1, 2, 3, 3]
     print(n_range_LR(a, 1, 2))
     print(n_range_LR(a, -1, 0))
-    print(binary_serch_with_is_equal(a, 1))
-    print(binary_serch_with_is_equal(a, 2))
-    print(binary_serch_with_is_equal(a, 2.5))
+    print(binary_search_with_is_equal(a, 1))
+    print(binary_search_with_is_equal(a, 2))
+    print(binary_search_with_is_equal(a, 2.5))
     
     
     

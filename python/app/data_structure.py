@@ -13,6 +13,7 @@ class UnionFindTree:
         self.n_node = n_node
         self.root_list = [i for i in range(n_node)]
         self.rank_list = [0]*n_node
+        self.n_unique_root = n_node
         
     def __find_root(self, node: int) -> int:
         """あるノードのrootのindexを返す
@@ -54,7 +55,7 @@ class UnionFindTree:
         node2 = self.__find_root(node2)
         if node1 == node2:
             return None
-        
+        self.n_unique_root -= 1
         if self.rank_list[node1] < self.rank_list[node2]:
             self.root_list[node1] = node2
         else:
@@ -102,3 +103,4 @@ if __name__ == "__main__":
     print(uf.is_same_group(1, 5))
     print(uf.rank_list)
     print(uf.root_list)
+    print(uf.n_unique_root)

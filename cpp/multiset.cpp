@@ -1,6 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 //二分探索木
+// NOTE 辞書を使ってうまくできないか考えてみる！
 //http://vivi.dyndns.org/tech/cpp/multiset.html
 int main(){
     //初期化
