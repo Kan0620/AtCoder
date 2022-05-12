@@ -107,6 +107,51 @@ def factorization(n: int) -> list:
 
     return fact
 
+def shakutori():
+    #尺取り法の例
+    #https://atcoder.jp/contests/abc229/tasks/abc229_d
+    S = input()
+    K = int(input())
+    # S[l_index:r_index]が選んでる状態 半開区間に注意
+    l_index = 0
+    r_index = 0
+    dot_counter = 0
+    ans = 0
+    # l_indexが右端にいくまで
+    while l_index < len(S):
+        # r_indexが終端の右側にあるとき
+        if r_index == len(S):
+            if S[l_index] == ".":
+                dot_counter -= 1
+                l_index += 1
+        # r_indexを含んでみる
+        elif S[r_index] == ".":
+            # 条件がOKならr_indexを進める
+            if dot_counter + 1 <= K:
+                r_index += 1
+                dot_counter += 1
+            else:
+            # 条件がダメなのでl_indexを進めたい
+                if l_index == r_index:
+                    # l_index == r_indexなら両方進める
+                    l_index += 1
+                    r_index += 1
+                else:
+                    # l_indexを進める
+                    if S[l_index] == ".":
+                        dot_counter -= 1
+                        l_index += 1
+        else:
+        # 条件がOKならr_indexを進める
+            r_index += 1
+            
+        # scoreの計算
+        if (r_index - l_index) > ans:
+            ans = r_index - l_index
+        
+        print(ans)
+
+
 if __name__ == "__main__":
     print("euler_tour")
     edges = [
