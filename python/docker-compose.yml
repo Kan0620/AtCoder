@@ -1,9 +1,11 @@
 version: '3'
 services:
-  python3:
+  atcoder:
     restart: always
-    build: .
-    container_name: 'python3'
+    build:
+      dockerfile: ./Dockerfile
+    image: atcoder
+    container_name: atcoder
     working_dir: '/root/app'
     tty: true
     volumes:

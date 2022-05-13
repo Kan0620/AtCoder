@@ -1,5 +1,6 @@
 from collections import deque
 import math
+import time
 
 def euler_tour(edges: list, root_node: int) -> list:
     """オイラーツアーで根のある木を区間にする
@@ -151,6 +152,49 @@ def shakutori():
         
         print(ans)
 
+def fast_pow(x:int, n: int, mod: int) -> int:
+    """x^nをmodで割った余りをlog(n)で求める関数
+
+    Args:
+        x (int): 底
+        n (int): 指数
+        mod (int): 法
+
+    Returns:
+        int: x^nをmodで割った余り
+    """
+    
+    rui = x%mod
+    ans = 1
+    while(n):
+        if n&1:
+            ans = (ans * rui)%mod
+        rui = (rui**2)%mod
+        n = n >> 1
+    return ans
+
+def gcd(a: int, b: int) -> int:
+    """a, bの最大公約数を求める関数
+
+    Args:
+        a (int): 自然数
+        b (int): 自然数
+
+    Returns:
+        int: a, bの最大公約数
+    """
+    if a==0:
+        return b
+    elif b==0:
+        return a
+    elif a > b:
+        return gcd(b, a%b)
+    else:
+        return gcd(a, b%a)
+        
+        
+    
+
 
 if __name__ == "__main__":
     print("euler_tour")
@@ -165,3 +209,16 @@ if __name__ == "__main__":
     print(in_t)
     print(out_t)
     print(tour_q)
+    print("=========", end='\n\n')
+    print("fast pow")
+    now = time.time()
+    ans = fast_pow(x=5, n=1000000, mod=3)
+    print(f"fast_pow ans={ans} {time.time()-now}s")
+    now = time.time()
+    print(f"simple_pow ans={(5**1000000)%3} {time.time()-now}s")
+    print("=========", end='\n\n')
+    print("gcd")
+    print(gcd(a=36, b=24))
+    print(gcd(a=17, b=13))
+    print(0//2)
+    
