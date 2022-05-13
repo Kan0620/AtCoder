@@ -63,7 +63,67 @@ class UnionFindTree:
             if self.rank_list[node1] == self.rank_list[node2]:
                 self.rank_list[node1] += 1
         return None
-        
+    
+    
+# https://qiita.com/takayg1/items/c811bd07c21923d7ec69 より引用
+class SegmentTree:
+    
+    def __init__(self, init_val: list, segfunc: "関数", ide_ele: int):
+        """セグ木の初期化
+
+        Args:
+            init_val (list): クエリを投げたい配列
+            segfunc (関数): 評価関数
+            ide_ele (int): 評価関数の単位元
+        """
+        n = len(init_val)
+        self.segfunc = segfunc
+        self.ide_ele = ide_ele
+        self.num = 1 << (n - 1).bit_length()
+        self.tree = [ide_ele] * 2 * self.num
+        # 配列の値を葉にセット
+        for i in range(n):
+            self.tree[self.num + i] = init_val[i]
+        # 構築していく
+        for i in range(self.num - 1, 0, -1):
+            self.tree[i] = self.segfunc(self.tree[2 * i], self.tree[2 * i + 1])
+
+    def update(self, k: int, x: int):
+        """k番目の値をxに変える log(N)
+
+        Args:
+            k (int): 変えたい値のindex
+            x (int): 変える値
+        """
+        k += self.num
+        self.tree[k] = x
+        while k > 1:
+            self.tree[k >> 1] = self.segfunc(self.tree[k], self.tree[k ^ 1])
+            k >>= 1
+
+    def query(self, l: int, r: int) -> int:
+        """_summary_
+
+        Args:
+            l (int): 閉区間の左側 0-index
+            r (int): 開区間の右側 0-index
+
+        Returns:
+            int:区間[l, r)の評価関数による値
+        """
+        res = self.ide_ele
+
+        l += self.num
+        r += self.num
+        while l < r:
+            if l & 1:
+                res = self.segfunc(res, self.tree[l])
+                l += 1
+            if r & 1:
+                res = self.segfunc(res, self.tree[r - 1])
+            l >>= 1
+            r >>= 1
+        return res
 
 
 
@@ -87,9 +147,10 @@ if __name__ == "__main__":
     a = [(8, 2), (2, 4), (3, 0)]
     heapq.heapify(a)
     print(heapq.heappop(a))
+    print("=========", end='\n\n')
     
     # UnionFindTree
-    print("\nUnionFindTree")
+    print("UnionFindTree")
     uf = UnionFindTree(10)
     edges = [
         [1, 3],
@@ -104,3 +165,24 @@ if __name__ == "__main__":
     print(uf.rank_list)
     print(uf.root_list)
     print(uf.n_unique_root)
+    print("=========", end='\n\n')
+    print("segment tree")
+    
+    """
+    単位元
+    min: min(x, y) float("inf")
+    max: max(x, y) -float("inf")
+    区間和: x+y 0
+    区間積: x*y 1
+    最大公約数 math.gcd(x, y) 0
+    """
+    arr = [2, 4, 2, 6, 7]
+    st = SegmentTree(init_val=arr, segfunc=lambda x, y: max(x, y), ide_ele=-float("inf"))
+    print("arr", arr)
+    print(st.query(1, 4))
+    print(st.query(1, 5))
+    st.update(4, -1)
+    print(st.query(1, 5))
+    
+    
+    
