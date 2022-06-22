@@ -105,4 +105,3 @@ if __name__ == "__main__":
     now = time.time()        
     d = dijkstra(n_node, edges_dict, 0)
     print(f"dijkstra: {time.time()-now}", d)
-    

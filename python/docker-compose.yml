@@ -5,7 +5,7 @@ services:
     build:
       dockerfile: ./Dockerfile
     image: atcoder
-    container_name: atcoder
+    #container_name: atcoder
     working_dir: '/root/app'
     tty: true
     volumes:

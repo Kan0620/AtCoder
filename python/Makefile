@@ -5,3 +5,7 @@ up:
 .PHONY: exec
 exec:
 	    docker compose exec atcoder bash
+
+.PHONY: down
+down:
+		docker compose down --rmi all

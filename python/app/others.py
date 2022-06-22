@@ -104,7 +104,7 @@ def factorization(n: int) -> list:
             fact.append([i, cnt])
 
     if n != 1:
-        fact[n] = 1
+        fact.append([n, 1])
 
     return fact
 
