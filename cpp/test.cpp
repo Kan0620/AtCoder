@@ -5,7 +5,9 @@ using namespace std;
 
 int main(){
     string a;
-    vector<int>  v(3);
+    vector<int>  v;
+    v.push_back(0);
+    cout << v[0] << endl;
     
     pair<int, string> p;
     p = make_pair(1, "one");
@@ -46,10 +48,10 @@ int main(){
     int s = 1;
     int t = 2;
 
-    G[s].push_back(t);
-    for (int i=0; i<G.size(); i++){
-        cout << G[i] << endl;
-    }
+    // G[s].push_back(t);
+    // for (int i=0; i<G.size(); i++){
+    //     cout << G[i] << endl;
+    // }
 
 
 
