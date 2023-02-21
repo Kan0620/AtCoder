@@ -37,6 +37,8 @@ def binary_search_with_is_equal(sorted_list: list, query_num: float):
 
 if __name__ == "__main__":
     a = [0, 0, 1, 1, 1, 2, 3, 3]
+    l_index = bisect.bisect_left(a, 1)
+    print(l_index)
     print(n_range_LR(a, 1, 2))
     print(n_range_LR(a, -1, 0))
     print(binary_search_with_is_equal(a, 1))
