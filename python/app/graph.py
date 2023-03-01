@@ -119,7 +119,38 @@ def strongly_connected_components(
                     connected_components.append(list(components))
     return connected_components
 
+"""
+https://output-zakki.com/topological_sort/ から引用
+"""
 
+def topological_sort(edges, into_num):
+    """トポロジカルソート 計算量はO(|V|+|E|)
+
+    Args:
+        edges (dict): 有向グラフを表す隣接リスト keyがindex, valueがlist
+        into_num (list): あるノードの入次数
+
+    Returns:
+        list: トポロジカルソートされたノードのリスト 閉路があれば空リスト
+    """
+    #入ってくる有向辺を持たないノードを列挙
+    q = deque()
+    #V: 頂点数
+    for i in range(len(into_num)):
+        if into_num[i]==0:
+            q.append(i)
+    
+    #以下、幅優先探索
+    ans = []
+    while q:
+        v = q.popleft()
+        ans.append(v)
+        for adj in edges[v]:
+            into_num[adj] -= 1 #入次数を減らす
+            if into_num[adj]==0:
+                q.append(adj) #入次数が0になったら、キューに入れる
+    
+    return ans
 
 
 
